@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Street Fighter</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/7/71/Street_Fighter_old_logo.png">
+  <style>
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.7)); }
+      50% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.9)); }
+      100% { filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.7)); }
+    }
+    .glow-effect {
+      animation: glow 2s infinite;
+    }
+    .nav-link.active {
+      background-color: #ef4444;
+      color: white;
+      animation: glow 2s infinite;
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+  <nav class="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-black to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex-shrink-0">
+          <img class="h-10 sm:h-12 md:h-14 lg:h-18 xl:h-22 w-auto glow-effect mt-2 sm:mt-3 md:mt-4 lg:mt-5 xl:mt-6" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Street_Fighter_old_logo.png" alt="Street Fighter">
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 hover:text-white transition-colors nav-link active">Home</a>
+            <a href="#characters" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">Characters</a>
+            <a href="#stages" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">Stages</a>
+            <a href="#tournaments" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">Tournaments</a>
+            <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">About</a>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu(event)">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path id="top-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16" />
+              <path id="middle-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16" />
+              <path id="bottom-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-red-700 hover:text-white transition-colors nav-link active">Home</a>
+        <a href="#characters" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">Characters</a>
+        <a href="#stages" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">Stages</a>
+        <a href="#tournaments" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">Tournaments</a>
+        <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-red-700 hover:text-white transition-colors nav-link">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main w-full h-full">
+    <section id="home" class="w-full h-screen overflow-hidden">
+      <img class="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 max-w-[500px] h-auto glow-effect select-none" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Street_Fighter_old_logo.png" alt="Street Fighter logo">
+      <canvas id="canvas"></canvas>
+    </section>
+    <section id="characters" class="w-full h-screen bg-zinc-800 flex items-center justify-center">
+      <h2 class="text-4xl font-bold">Characters</h2>
+    </section>
+    <section id="stages" class="w-full h-screen bg-zinc-700 flex items-center justify-center">
+      <h2 class="text-4xl font-bold">Stages</h2>
+    </section>
+    <section id="tournaments" class="w-full h-screen bg-zinc-600 flex items-center justify-center">
+      <h2 class="text-4xl font-bold">Tournaments</h2>
+    </section>
+    <section id="about" class="w-full h-screen bg-zinc-500 flex items-center justify-center">
+      <h2 class="text-4xl font-bold">About</h2>
+    </section>
+  </div>
+
+  <!-- Scroll to top arrow -->
+  <div id="scrollToTop" class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 bg-red-700 text-white p-2 sm:p-3 rounded-full cursor-pointer opacity-0 transition-opacity duration-300 hover:bg-red-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+  <script>
+    function toggleMobileMenu(event) {
+      event.stopPropagation(); // Prevent the event from bubbling up
+      const mobileMenu = document.getElementById('mobile-menu');
+      const topLine = document.getElementById('top-line');
+      const middleLine = document.getElementById('middle-line');
+      const bottomLine = document.getElementById('bottom-line');
+
+      mobileMenu.classList.toggle('hidden');
+
+      if (!mobileMenu.classList.contains('hidden')) {
+        gsap.to(topLine, {duration: 0.3, attr: {d: "M6 18L18 6"}, ease: "power2.inOut"});
+        gsap.to(middleLine, {duration: 0.3, opacity: 0, ease: "power2.inOut"});
+        gsap.to(bottomLine, {duration: 0.3, attr: {d: "M6 6L18 18"}, ease: "power2.inOut"});
+      } else {
+        gsap.to(topLine, {duration: 0.3, attr: {d: "M4 6h16"}, ease: "power2.inOut"});
+        gsap.to(middleLine, {duration: 0.3, opacity: 1, ease: "power2.inOut"});
+        gsap.to(bottomLine, {duration: 0.3, attr: {d: "M4 18h16"}, ease: "power2.inOut"});
+      }
+    }
+
+    // Add GSAP animation for navbar appearance
+    gsap.from("nav", {duration: 1, y: -50, opacity: 0, ease: "power3.out"});
+
+    // Prevent touch events on the navbar from affecting the 3D model
+    document.querySelector('nav').addEventListener('touchstart', function(event) {
+      event.stopPropagation();
+    }, { passive: false });
+
+    document.querySelector('nav').addEventListener('touchmove', function(event) {
+      event.stopPropagation();
+    }, { passive: false });
+
+    document.querySelector('nav').addEventListener('touchend', function(event) {
+      event.stopPropagation();
+    }, { passive: false });
+
+    // Smooth scrolling for navigation links and add active class
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+
+        // Remove active class from all links
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+
+        // Add active class to clicked link
+        this.classList.add('active');
+
+        // Close mobile menu if it's open
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (!mobileMenu.classList.contains('hidden')) {
+          toggleMobileMenu(e);
+        }
+      });
+    });
+
+    // Set active class on scroll and show/hide scroll to top arrow
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const scrollToTop = document.getElementById('scrollToTop');
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - sectionHeight / 3) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+          link.classList.add('active');
+        }
+      });
+
+      // Show/hide scroll to top arrow
+      if (window.pageYOffset > 300) {
+        scrollToTop.style.opacity = '1';
+      } else {
+        scrollToTop.style.opacity = '0';
+      }
+    });
+
+    // Set 'Home' as initially active for both desktop and mobile
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const homeLinks = document.querySelectorAll('a[href="#home"]');
+      homeLinks.forEach(link => {
+        link.classList.add('active');
+      });
+    });
+
+    // Scroll to top functionality
+    document.getElementById('scrollToTop').addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
